@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		let obj = {
+			width: 6,
+			arr: [
+			'1', '1', '1', '1', '3', '1',
+			'3', '1', '2', '1', '3', '3',
+			'3', '3', '2', '1', '2', '3',
+			'2', '3', '2', '2', '3', '3',
+			'2', '1', '1', '2', '2', '1',
+			'1', '1', '2', '1', '2', '3',
+			'2', '1', '2', '2', '2', '3',
+			'1', '1', '1', '1', '1', '1'
+			],
+		}
+
+		console.log(obj.arr[obj.arr.length - 1]);
+		let findSameElements = (obj, position, value, newArr) => {
+				if (obj.arr[position] == value) {
+					obj.arr[position] = '0';
+					newArr.push(position);
+					if (position > obj.width - 1){
+						newArr = findSameElements(obj, position - obj.width, value, newArr);
+					}
+					if (position < obj.arr.length - obj.width){
+						newArr = findSameElements(obj, position + obj.width, value, newArr);
+					}
+					if (position % (obj.width) != 0){
+						newArr = findSameElements(obj, position - 1, value, newArr);
+					}
+					if (position % (obj.width) != obj.width - 1){
+						newArr = findSameElements(obj, position + 1, value, newArr);
+					}
+				}
+				return newArr;
+		}
+		console.log(findSameElements(obj, 16, obj.arr[16], []));
+		console.log(obj.arr); 
+
+	</script>
+</body>
+</html>
+
